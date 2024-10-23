@@ -15,6 +15,5 @@ ENV CXX=g++-14
 
 RUN cmake -DCMAKE_BUILD_TYPE=Release -S . -B build
 RUN cmake --build build -j $(nproc) -v
-RUN g++-14 --version
 
 ENTRYPOINT [ "build/tests/sensor_test" ]
