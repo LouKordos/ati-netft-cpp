@@ -1,5 +1,5 @@
 #!/usr/bin/bash
 set -x
 
-docker compose build --progress plain
+docker build --progress plain --network host -t ati-netft-cpp:latest .
 docker compose up
