@@ -1,0 +1,7 @@
+services:
+    ati-netft-cpp:
+        build: .
+        image: ati-netft-cpp
+        environment:
+            - TERM=xterm-256color
+        network_mode: "host"
