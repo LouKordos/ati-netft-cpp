@@ -12,7 +12,7 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_CXX_FLAGS "-Wall -Wextra -march=native -mtune=native")
-set(CMAKE_CXX_FLAGS_DEBUG "-g3")
+set(CMAKE_CXX_FLAGS_DEBUG "-g3 -ffold-simple-inlines")
 set(CMAKE_CXX_FLAGS_RELEASE "-O2")
 
 set(default_build_type "Release")
