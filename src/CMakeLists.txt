@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.28.0)
-project(ATINetFTSensor)
+project(ATINetFTSensor VERSION 1.0.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -18,8 +18,8 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
     "Debug" "Release")
 endif()
 
-add_library(ati-netft STATIC include/netft_sensor.hpp)
-target_include_directories(ati-netft PUBLIC include)
+add_library(ati-netft INTERFACE)
+# target_include_directories(ati-netft PUBLIC include)
 
 # Link Time Optimization
 include(CheckIPOSupported)
