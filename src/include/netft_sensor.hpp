@@ -94,7 +94,7 @@ class netft_sensor {
 
             if(bytes_received == -1) {
                 if(errno == EWOULDBLOCK || errno == EAGAIN) {
-                    return std::unexpected("TImeout occured while reading Force / Torque data.");
+                    return std::unexpected("Timeout occured while reading Force / Torque data.");
                 }
                 else {
                     return std::unexpected("An error occured while reading Force / Torque data.");
