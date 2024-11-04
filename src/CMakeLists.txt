@@ -18,7 +18,7 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
     "Debug" "Release")
 endif()
 
-add_library(ati-netft STATIC netft_sensor.cpp include/netft_sensor.hpp)
+add_library(ati-netft STATIC include/netft_sensor.hpp)
 target_include_directories(ati-netft PUBLIC include)
 
 # Link Time Optimization
