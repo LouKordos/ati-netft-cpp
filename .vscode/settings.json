@@ -46,5 +46,6 @@
         "streambuf": "cpp",
         "typeinfo": "cpp",
         "expected": "cpp"
-    }
+    },
+    "cmake.sourceDirectory": "/home/arena/Documents/loukas/ati-netft-cpp/src"
 }
