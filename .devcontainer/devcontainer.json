@@ -18,6 +18,6 @@
     	"--security-opt", "seccomp=unconfined"
 	],
 	"workspaceFolder": "/app/src",
-	"postCreateCommand": "cmake -DCMAKE_BUILD_TYPE=Debug -S . -B build && cmake --build build",
+	"postCreateCommand": "cmake -DCMAKE_BUILD_TYPE=Release -S . -B build && cmake --build build",
 	"remoteUser": "root"
 }
