@@ -2,20 +2,25 @@
 #include <iostream>
 #include "../include/netft_sensor.hpp"
 #include <print>
+#include <expected>
 
 int main() {
     netft_sensor* force_sensor = new netft_sensor("10.36.12.7");
-    bool success = force_sensor->zero_sensor();
-    std::print("{0}\n", success);
+    bool connected = force_sensor->init();
+    bool calibrated = force_sensor->calibrate();
+    // bool success = force_sensor->zero_sensor();
+    // std::print("connected={0}\tzero_success={1}\tcalibrated={2}\n", connected, success, calibrated);
     std::print("{0}\n", force_sensor->get_zero_offset().first.x);
-    std::expected<std::pair<vec3d, vec3d>, std::string> sensor_data = force_sensor->get_data();
-    
-    if(sensor_data.has_value()) {
-        std::print("Force Z: {0}\n", sensor_data.value().first.z);
-    }
-    else {
-        std::print("Error while getting force / torque sensor data: {0}", sensor_data.error());
-    }
 
+    for(int i = 0; i < 10000; i++) {
+        std::expected<std::pair<vec3d, vec3d>, std::string> sensor_data = force_sensor->get_data();
+        
+        if(sensor_data.has_value()) {
+            std::print("Force Z: {0}\n", sensor_data.value().first.z);
+        }
+        else {
+            std::print("Error while getting force / torque sensor data: {0}\n", sensor_data.error());
+        }
+    }
     return 0;
 }
