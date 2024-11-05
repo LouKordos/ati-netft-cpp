@@ -18,8 +18,20 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
     "Debug" "Release")
 endif()
 
+include(FetchContent)
+FetchContent_Declare (
+  tracy
+  GIT_REPOSITORY https://github.com/wolfpld/tracy.git
+  GIT_TAG master
+  GIT_SHALLOW TRUE
+  GIT_PROGRESS TRUE
+)
+FetchContent_MakeAvailable(tracy)
+option(TRACY_ENABLE "" ON)
+
 add_library(ati-netft INTERFACE)
 # target_include_directories(ati-netft PUBLIC include)
+target_link_libraries(ati-netft INTERFACE TracyClient)
 
 # Link Time Optimization
 include(CheckIPOSupported)

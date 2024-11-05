@@ -1,7 +1,7 @@
 FROM ubuntu:24.04
 
 RUN apt-get update -y && \
-	apt-get install -y g++-14 gcc-14 cmake build-essential gdb vim && \
+	apt-get install -y g++-14 gcc-14 cmake build-essential gdb git vim && \
 	rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app/src
