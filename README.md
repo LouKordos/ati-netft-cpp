@@ -9,3 +9,5 @@ IMPORTANT: This library is header-only and, to keep it simple, assumes only ONE 
 If you need the data from multiple threads, have one update thread and read the data from a global variable.
 
 Also, the decision was made to not provide this threading functionality internally in order to keep things simple (again). Spawning threads inside the library may cause unintended behavior for the caller and offering both options would increase complexity too much for such a simple library.
+
+The library uses the [Tracy Profiler](https://github.com/wolfpld/tracy), you need to install the server on your GUI host, the rest is included by just building this library.

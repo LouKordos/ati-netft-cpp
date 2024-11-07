@@ -12,6 +12,7 @@
 #include <cstdint>
 #include <cerrno>
 #include <cstring>
+#include <tracy/Tracy.hpp>
 
 struct vec3d {
     double x;
@@ -104,6 +105,7 @@ class netft_sensor {
         }
 
         bool calibrate() {
+            ZoneScoped;
             if(!connected) {
                 return false;
             }
@@ -163,18 +165,23 @@ class netft_sensor {
         }
 
         std::expected<std::pair<vec3d, vec3d>, std::string> get_data(bool without_zero_offset = false) {
+            ZoneScoped;
             if(!connected) {
                 return std::unexpected("Not connected yet.");
             }
 
             message get_data_msg {}; // See https://www.ati-ia.com/app_content/documents/9620-05-NET%20FT.pdf
-
-            if(send(socket_fd, &get_data_msg, sizeof(get_data_msg), 0) == -1) {
-                return std::unexpected("get_data_msg send failed.");
+            {
+                ZoneScopedN("Send READFT msg");
+                if(send(socket_fd, &get_data_msg, sizeof(get_data_msg), 0) == -1) {
+                    return std::unexpected("get_data_msg send failed.");
+                }
             }
 
             uint8_t buffer[1024];
+            ZoneNamedN(recvzone, "Recv", true);
             ssize_t bytes_received = recv(socket_fd, buffer, sizeof(buffer), 0);
+            ZoneNamedN(lengthcheckzone, "Length check", true);
             size_t expected_size = sizeof(uint16_t) * 2 + sizeof(int16_t) * 6;
 
             if(bytes_received == -1) {
@@ -192,7 +199,7 @@ class netft_sensor {
             else if(static_cast<size_t>(bytes_received) < expected_size) {
                 return std::unexpected(std::format("Not enough bytes received. bytes_received={0}, expected_bytes={1}", bytes_received, expected_size));
             }
-
+            ZoneNamedN(parsezone, "Parse", true);
             std::span<uint8_t> buffer_span(buffer, bytes_received);
             size_t offset = sizeof(uint16_t) * 2; // Skip header and status
 
