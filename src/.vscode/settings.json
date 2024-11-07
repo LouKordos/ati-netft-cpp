@@ -53,6 +53,17 @@
         "typeinfo": "cpp",
         "variant": "cpp",
         "print": "cpp",
-        "text_encoding": "cpp"
+        "text_encoding": "cpp",
+        "chrono": "cpp",
+        "condition_variable": "cpp",
+        "ratio": "cpp",
+        "iomanip": "cpp",
+        "mutex": "cpp",
+        "semaphore": "cpp",
+        "shared_mutex": "cpp",
+        "sstream": "cpp",
+        "stop_token": "cpp",
+        "thread": "cpp",
+        "cinttypes": "cpp"
     }
 }
