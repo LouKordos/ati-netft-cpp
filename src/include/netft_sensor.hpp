@@ -231,6 +231,35 @@ class netft_sensor {
                 current_force.z -= force_zero_offset.z;
             }
 
+
+            // TORQUES
+            uint16_t torque_x_net;
+            std::memcpy(&torque_x_net, &buffer_span[offset], sizeof(torque_x_net));
+            offset += sizeof(torque_x_net);
+            // noths returns uint16_t but the actual value is int16, so we need two casts
+            current_torque.x = static_cast<double>(static_cast<int16_t>(ntohs(torque_x_net))) * static_cast<double>(calibration_data.scaleFactors[3]) / static_cast<double>(calibration_data.countsPerTorque);
+            if(!without_zero_offset) {
+                current_torque.x -= torque_zero_offset.x;
+            }
+
+            uint16_t torque_y_net;
+            std::memcpy(&torque_y_net, &buffer_span[offset], sizeof(torque_y_net));
+            offset += sizeof(torque_y_net);
+            // noths returns uint16_t but the actual value is int16, so we need two casts
+            current_torque.y = static_cast<double>(static_cast<int16_t>(ntohs(torque_y_net))) * static_cast<double>(calibration_data.scaleFactors[4]) / static_cast<double>(calibration_data.countsPerTorque);
+            if(!without_zero_offset) {
+                current_torque.y -= torque_zero_offset.y;
+            }
+
+            uint16_t torque_z_net;
+            std::memcpy(&torque_z_net, &buffer_span[offset], sizeof(torque_z_net));
+            offset += sizeof(torque_z_net);
+            // noths returns uint16_t but the actual value is int16, so we need two casts
+            current_torque.z = static_cast<double>(static_cast<int16_t>(ntohs(torque_z_net))) * static_cast<double>(calibration_data.scaleFactors[5]) / static_cast<double>(calibration_data.countsPerTorque);
+            if(!without_zero_offset) {
+                current_torque.z -= torque_zero_offset.z;
+            }
+
             return std::pair<vec3d, vec3d>{current_force, current_torque};
         }
 };
