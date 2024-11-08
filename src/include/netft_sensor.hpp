@@ -201,13 +201,14 @@ class netft_sensor {
             }
             ZoneNamedN(parsezone, "Parse", true);
             std::span<uint8_t> buffer_span(buffer, bytes_received);
-            size_t offset = sizeof(uint16_t) * 2; // Skip header and status
+            size_t offset = sizeof(uint16_t) + sizeof(uint16_t); // Skip header and status
 
-            int16_t force_x_net;
+            // FORCES
+            uint16_t force_x_net;
             std::memcpy(&force_x_net, &buffer_span[offset], sizeof(force_x_net));
             offset += sizeof(force_x_net);
-
-            current_force.x = static_cast<double>(ntohs(force_x_net)) * static_cast<double>(calibration_data.scaleFactors[0]) / static_cast<double>(calibration_data.countsPerForce);
+            // noths returns uint16_t but the actual value is int16, so we need two casts
+            current_force.x = static_cast<double>(static_cast<int16_t>(ntohs(force_x_net))) * static_cast<double>(calibration_data.scaleFactors[0]) / static_cast<double>(calibration_data.countsPerForce);
             if(!without_zero_offset) {
                 current_force.x -= force_zero_offset.x;
             }
@@ -216,7 +217,7 @@ class netft_sensor {
             std::memcpy(&force_y_net, &buffer_span[offset], sizeof(force_y_net));
             offset += sizeof(force_y_net);
 
-            current_force.y = static_cast<double>(ntohs(force_y_net)) * static_cast<double>(calibration_data.scaleFactors[1]) / static_cast<double>(calibration_data.countsPerForce);
+            current_force.y = static_cast<double>(static_cast<int16_t>(ntohs(force_y_net))) * static_cast<double>(calibration_data.scaleFactors[1]) / static_cast<double>(calibration_data.countsPerForce);
             if(!without_zero_offset) {
                 current_force.y -= force_zero_offset.y;
             }
@@ -225,7 +226,7 @@ class netft_sensor {
             std::memcpy(&force_z_net, &buffer_span[offset], sizeof(force_z_net));
             offset += sizeof(force_z_net);
 
-            current_force.z = static_cast<double>(ntohs(force_z_net)) * static_cast<double>(calibration_data.scaleFactors[2]) / static_cast<double>(calibration_data.countsPerForce);
+            current_force.z = static_cast<double>(static_cast<int16_t>(ntohs(force_z_net))) * static_cast<double>(calibration_data.scaleFactors[2]) / static_cast<double>(calibration_data.countsPerForce);
             if(!without_zero_offset) {
                 current_force.z -= force_zero_offset.z;
             }
