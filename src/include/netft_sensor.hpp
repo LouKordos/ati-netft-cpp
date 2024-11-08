@@ -37,9 +37,9 @@ namespace ati_netft {
         };
 
     private:
-        std::string ip;
-        int port;
-        double timeout_sec;
+        const std::string ip;
+        const int port;
+        const double timeout_sec;
         std::array<double, 3> force_zero_offset{0, 0, 0};
         std::array<double, 3> torque_zero_offset{0, 0, 0};
         std::array<double, 3> current_force{0, 0, 0};
