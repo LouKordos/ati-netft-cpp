@@ -50,7 +50,7 @@ namespace ati_netft {
         calibration_info calibration_data{};
 
     public:
-        netft_sensor(const std::string ip, const int port = 49151, const double timeout_sec = 0.01) : ip(ip), port(port), timeout_sec(timeout_sec)
+        netft_sensor(std::string const& ip, const int port = 49151, const double timeout_sec = 0.01) : ip(ip), port(port), timeout_sec(timeout_sec)
         {
         }
 
