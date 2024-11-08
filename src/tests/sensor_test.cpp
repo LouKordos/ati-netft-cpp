@@ -21,8 +21,8 @@ int main() {
         ZoneNamedN(aftergetdatazone, "Before has_value", true);
         if(sensor_data.has_value()) {
             ZoneNamedN(afterhasvaluecheckzone, "After has_value check", true);
-            // ZoneScopedN("Has Value");
-            std::println("Force [N]: {0:.4f} {1:.4f} {2:.4f}\tTorque [Nm]: {3:.4f} {4:.4f} {5:.4f}", sensor_data.value().first[0], sensor_data.value().first[1], sensor_data.value().first[2], sensor_data.value().second[0], sensor_data.value().second[1], sensor_data.value().second[2]);
+            auto [forces, torques] = sensor_data.value();
+            std::println("Force [N]: {0:.4f} {1:.4f} {2:.4f}\tTorque [Nm]: {3:.4f} {4:.4f} {5:.4f}", forces[0], forces[1], forces[2], torques[0], torques[1], torques[2]);
         }
         else {
             std::println("Error while getting force / torque sensor data: {0}", sensor_data.error());
