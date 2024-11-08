@@ -46,8 +46,8 @@ namespace ati_netft {
         std::array<double, 3> current_torque{0, 0, 0};
         bool connected{false};
         int socket_fd;
-        const size_t BUFFER_SIZE = 1024;
-        calibration_info calibration_data;
+        const size_t BUFFER_SIZE{1024};
+        calibration_info calibration_data{};
 
     public:
         netft_sensor(const std::string ip, const int port = 49151, const double timeout_sec = 0.01) : ip(ip), port(port), timeout_sec(timeout_sec)
