@@ -23,10 +23,11 @@ int main() {
         if(sensor_data.has_value()) {
             ZoneNamedN(afterhasvaluecheckzone, "After has_value check", true);
             // ZoneScopedN("Has Value");
-            std::print("Force Z: {0}\n", sensor_data.value().first.z);
+            std::print("Force: {0:.4f} {1:.4f} {2:.4f}\tTorque: {3:.4f} {4:.4f} {5:.4f}\n", sensor_data.value().first.x, sensor_data.value().first.y, sensor_data.value().first.z, sensor_data.value().second.x, sensor_data.value().second.y, sensor_data.value().second.z);
         }
         else {
             std::print("Error while getting force / torque sensor data: {0}\n", sensor_data.error());
+            exit(1);
         }
     }
     return 0;
