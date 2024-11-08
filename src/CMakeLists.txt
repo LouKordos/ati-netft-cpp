@@ -4,7 +4,7 @@ project(ATINetFTSensor VERSION 1.0.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(CMAKE_CXX_FLAGS "-Wall -Wextra -march=native -mtune=native")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -save-temps -fverbose-asm -Wall -Wextra -march=native -mtune=native")
 set(CMAKE_CXX_FLAGS_DEBUG "-g3 -ffold-simple-inlines")
 set(CMAKE_CXX_FLAGS_RELEASE "-O2")
 
