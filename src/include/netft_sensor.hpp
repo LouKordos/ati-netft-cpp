@@ -23,7 +23,9 @@ namespace ati_netft {
             uint8_t command;
             uint8_t reserved[19];
         };
+
         // https://www.ati-ia.com/app_content/documents/9620-05-NET%20FT.pdf
+        // Naming convention is identical to docs even though they are mixing camelCase and snake_case
         struct calibration_info
         {
             uint16_t header;
