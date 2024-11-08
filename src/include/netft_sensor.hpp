@@ -91,6 +91,7 @@ namespace ati_netft {
             if (socket_fd == -1)
             {
                 connected = false;
+                return false;
             }
 
             sockaddr_in server_addr;
@@ -101,6 +102,7 @@ namespace ati_netft {
             if (connect(socket_fd, (sockaddr *)&server_addr, sizeof(server_addr)) == -1)
             {
                 connected = false;
+                return false;
             }
             else
             {
