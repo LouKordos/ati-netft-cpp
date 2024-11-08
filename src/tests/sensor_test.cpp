@@ -7,8 +7,8 @@
 
 int main() {
     ZoneScoped;
-    netft_sensor force_sensor("10.36.12.7");
-    bool connected = force_sensor.init();
+    ati_netft::netft_sensor force_sensor("10.36.12.7");
+    bool connected = force_sensor.initialize_connection();
     bool calibrated = force_sensor.calibrate();
     // bool success = force_sensor->zero_sensor();
     // std::print("connected={0}\tzero_success={1}\tcalibrated={2}\n", connected, success, calibrated);
