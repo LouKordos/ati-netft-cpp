@@ -10,8 +10,8 @@ int main() {
     ati_netft::netft_sensor force_sensor("10.36.12.7");
     bool connected = force_sensor.initialize_connection();
     bool calibrated = force_sensor.calibrate();
-    // bool success = force_sensor->zero_sensor();
-    // std::print("connected={0}\tzero_success={1}\tcalibrated={2}\n", connected, success, calibrated);
+    bool success = force_sensor.zero_sensor();
+    std::print("connected={0}\tzero_success={1}\tcalibrated={2}\n", connected, success, calibrated);
     std::println("force_zero_offset={0}, {1}, {2}\ttorque_zero_offset={3}, {4}, {5}", force_sensor.get_zero_offset().first[0], force_sensor.get_zero_offset().first[1], force_sensor.get_zero_offset().first[2], force_sensor.get_zero_offset().second[0], force_sensor.get_zero_offset().second[1], force_sensor.get_zero_offset().second[2]);
 
     for(int i = 0; i < 10000; i++) {
