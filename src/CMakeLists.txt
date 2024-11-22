@@ -27,7 +27,7 @@ FetchContent_MakeAvailable(tracy)
 option(TRACY_ENABLE "" ON)
 
 add_library(ati-netft INTERFACE)
-# target_include_directories(ati-netft PUBLIC include)
+target_include_directories(ati-netft INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
 target_link_libraries(ati-netft INTERFACE TracyClient)
 
 # Link Time Optimization
