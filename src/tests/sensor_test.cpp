@@ -23,6 +23,7 @@ int main() {
             ZoneNamedN(afterhasvaluecheckzone, "After has_value check", true);
             auto [forces, torques] = sensor_data.value();
             std::println("Force [N]: {0:.4f} {1:.4f} {2:.4f}\tTorque [Nm]: {3:.4f} {4:.4f} {5:.4f}", forces[0], forces[1], forces[2], torques[0], torques[1], torques[2]);
+            std::println("Force Magnitude [N]: {0:.4f}, Torque Magnitude [Nm]: {1:.4f}", force_sensor.get_force_magnitude(), force_sensor.get_torque_magnitude());
         }
         else {
             std::println("Error while getting force / torque sensor data: {0}", sensor_data.error());

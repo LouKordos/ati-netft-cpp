@@ -11,6 +11,8 @@
 #include <span>
 #include <cstdint>
 #include <cerrno>
+#include <numeric>
+#include <cmath>
 #include <cstring>
 #include <tracy/Tracy.hpp>
 
@@ -82,6 +84,14 @@ namespace ati_netft {
         std::pair<std::array<double, 3>, std::array<double, 3>> get_zero_offset()
         {
             return std::pair<std::array<double, 3>, std::array<double, 3>>{force_zero_offset, torque_zero_offset};
+        }
+
+        double get_force_magnitude() const {
+            return std::sqrt(std::inner_product(current_force.begin(), current_force.end(), current_force.begin(), 0.0));
+        }
+
+        double get_torque_magnitude() const {
+            return std::sqrt(std::inner_product(current_torque.begin(), current_torque.end(), current_torque.begin(), 0.0));
         }
 
         bool initialize_connection()
