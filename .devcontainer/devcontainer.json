@@ -22,9 +22,9 @@
         "--privileged",
         "--pid=host"
 	],
-    "workspaceFolder": "/app/src",
+    "workspaceFolder": "/app",
     "workspaceMount": "source=${localWorkspaceFolder},target=/app/,type=bind,consistency=cached",
-    "postCreateCommand": "cmake -DCMAKE_BUILD_TYPE=Release -S /app/src -B /app/src/build && cmake --build /app/src/build",
+    "postCreateCommand": "cmake -DCMAKE_BUILD_TYPE=Release -S /app -B /app/build && cmake --build /app/build",
     "remoteUser": "root",
     "mounts": [
         "type=bind,source=/sys/kernel/debug,target=/sys/kernel/debug,readonly"
